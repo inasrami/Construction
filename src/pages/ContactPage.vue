@@ -3,8 +3,8 @@ import QuoteForm from '../components/QuoteForm.vue'
 import { company } from '../data/company'
 </script>
 <template>
-  <div v-reveal class="wrap page-head"><h1>Request a quote</h1><p class="lead">Describe your project and we will reply within two working days.</p></div>
-  <section v-reveal class="wrap section two">
+  <div class="wrap page-head"><h1>Request a quote</h1><p class="lead">Describe your project and we will reply within two working days.</p></div>
+  <section class="wrap section two">
     <QuoteForm />
     <div>
       <h2>Prefer to call?</h2>

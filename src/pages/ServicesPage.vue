@@ -2,11 +2,11 @@
 import { services } from '../data/services'
 </script>
 <template>
-  <div v-reveal class="wrap page-head">
+  <div class="wrap page-head">
     <h1>Services</h1>
     <p class="lead">Four kinds of work, all done by our own crews.</p>
   </div>
-  <section v-reveal class="wrap rows">
+  <section class="wrap rows">
     <div v-for="s in services" :key="s.title">
       <h2>{{ s.title }}</h2>
       <div>
@@ -15,7 +15,7 @@ import { services } from '../data/services'
       </div>
     </div>
   </section>
-  <section v-reveal class="section wrap">
+  <section class="section wrap">
     <RouterLink to="/contact" class="btn">Request a quote</RouterLink>
   </section>
 </template>

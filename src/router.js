@@ -8,7 +8,7 @@ import ContactPage from './pages/ContactPage.vue'
 
 export default createRouter({
   history: createWebHistory(),
-  scrollBehavior: () => ({ top: 0 }),
+  scrollBehavior: (to, from, saved) => saved || { top: 0, behavior: 'instant' },
   routes: [
     { path: '/', component: HomePage },
     { path: '/services', component: ServicesPage },

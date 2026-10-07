@@ -1,0 +1,384 @@
+diff --git a/src/assets/main.css b/src/assets/main.css
+index 81e7fb0..06a4f88 100644
+--- a/src/assets/main.css
++++ b/src/assets/main.css
+@@ -1,4 +1,4 @@
+-:root { --ink: #17324d; --paper: #f5f4f0; --concrete: #d9ddde; --steel: #56656f; --signal: #e8a317; --white: #fff }
++:root { --ink: #17324d; --paper: #f5f4f0; --concrete: #d9ddde; --steel: #56656f; --signal: #e8a317; --white: #fff; --ease-out: cubic-bezier(0.23, 1, 0.32, 1) }
+ * { box-sizing: border-box }
+ html { scroll-behavior: smooth }
+ body { margin: 0; font: 400 1.0625rem/1.65 'Public Sans', system-ui, sans-serif; color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased }
+@@ -20,11 +20,15 @@ img { max-width: 100% }
+ .section > h2::after { content: ''; display: block; width: 48px; height: 4px; margin-top: 14px; background: var(--signal) }
+ .eyebrow { margin-bottom: 18px; color: var(--signal); font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase }
+ 
+-.btn, .btn-line { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 24px; font-size: .96rem; font-weight: 600; font-family: inherit; text-decoration: none; border: 1px solid var(--signal); border-radius: 3px; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease }
++.btn, .btn-line { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 24px; font-size: .96rem; font-weight: 600; font-family: inherit; text-decoration: none; border: 1px solid var(--signal); border-radius: 3px; cursor: pointer; transition: background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease, transform 160ms var(--ease-out) }
+ .btn { background: var(--signal); color: var(--ink); box-shadow: 0 5px 16px rgba(232, 163, 23, .18) }
+-.btn:hover { background: #f5b72e; border-color: #f5b72e; transform: translateY(-2px) }
+ .btn-line { color: #fff; border-color: rgba(255,255,255,.72); background: rgba(255,255,255,.06) }
+-.btn-line:hover { color: var(--ink); background: #fff; border-color: #fff }
++@media (hover: hover) and (pointer: fine) {
++  .btn:hover { background: #f5b72e; border-color: #f5b72e; transform: translateY(-2px) }
++  .btn-line:hover { color: var(--ink); background: #fff; border-color: #fff }
++}
++.btn:active, .btn-line:active { transform: scale(.97) }
++.btn:disabled { opacity: .65; cursor: default; transform: none }
+ .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px }
+ 
+ .site-header { position: sticky; top: 0; z-index: 5; background: rgba(245,244,240,.94); border-bottom: 1px solid rgba(23,50,77,.1); backdrop-filter: blur(14px) }
+@@ -34,22 +38,23 @@ img { max-width: 100% }
+ .logo::after { content: ''; position: absolute; left: 11px; top: 50%; width: 7px; height: 12px; transform: translateY(1px); background: var(--ink) }
+ .site-header nav { display: flex; align-items: center; gap: 28px }
+ .site-header nav a:not(.btn) { position: relative; padding: 8px 0; font-size: .95rem; font-weight: 600; text-decoration: none; color: #45596a; transition: color .2s ease }
+-.site-header nav a:not(.btn):hover, .site-header nav a.router-link-exact-active:not(.btn) { color: var(--ink) }
++.site-header nav a.router-link-exact-active:not(.btn) { color: var(--ink) }
++@media (hover: hover) and (pointer: fine) { .site-header nav a:not(.btn):hover { color: var(--ink) } }
+ .site-header nav a.router-link-exact-active:not(.btn)::after { content: ''; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: var(--signal) }
+ .site-header nav .btn { min-height: 44px; padding: 9px 17px }
+ .menu { display: none }
+ @media (max-width: 760px) {
+   .bar { height: 68px }
+-  .menu { display: block; background: transparent; border: 1px solid var(--concrete); border-radius: 3px; padding: 7px 13px; font: 600 .9rem 'Public Sans', sans-serif; color: inherit }
+-  .site-header nav { display: none; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 8px; padding: 18px 20px 22px; background: var(--paper); border-bottom: 1px solid var(--concrete); box-shadow: 0 14px 20px rgba(23,50,77,.1) }
+-  .site-header nav.open { display: flex }
++  .menu { display: block; background: transparent; border: 1px solid var(--concrete); border-radius: 3px; padding: 7px 13px; font: 600 .9rem 'Public Sans', sans-serif; color: inherit; transition: transform 160ms var(--ease-out) }
++  .menu:active { transform: scale(.97) }
++  .site-header nav { position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 8px; padding: 18px 20px 22px; background: var(--paper); border-bottom: 1px solid var(--concrete); box-shadow: 0 14px 20px rgba(23,50,77,.1); visibility: hidden; opacity: 0; transform: translateY(-8px); transform-origin: top; pointer-events: none; transition: opacity 120ms var(--ease-out), transform 120ms var(--ease-out), visibility 0s linear 120ms }
++  .site-header nav.open { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), visibility 0s }
+   .site-header nav a:not(.btn) { padding: 8px 0 }
+   .site-header nav .btn { margin-top: 6px }
+ }
+ 
+ .hero, .thumb { background-color: var(--ink) }
+ .hero { position: relative; display: flex; align-items: center; min-height: 590px; overflow: hidden; color: #fff; background-image: linear-gradient(90deg, rgba(10,26,41,.9) 0%, rgba(10,26,41,.73) 47%, rgba(10,26,41,.12) 100%), url('./images/hero.jpeg'); background-position: center 55%; background-size: cover }
+-.hero { animation: hero-enter 1s ease-out both }
+ .hero::after { content: ''; position: absolute; right: 6%; bottom: -110px; width: 340px; height: 340px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; box-shadow: 0 0 0 36px rgba(255,255,255,.04), 0 0 0 72px rgba(255,255,255,.03); pointer-events: none }
+ .hero .wrap { position: relative; z-index: 1; width: 100%; padding-top: 104px; padding-bottom: 104px }
+ .hero .wrap > div { max-width: 690px }
+@@ -57,41 +62,46 @@ img { max-width: 100% }
+ .hero .lead { max-width: 52ch; color: rgba(255,255,255,.84) }
+ .hero .eyebrow { display: flex; align-items: center; gap: 10px }
+ .hero .eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--signal) }
+-.hero-copy { animation: hero-copy-enter .8s .12s cubic-bezier(.2,.75,.25,1) both }
+-.reveal-ready { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1) }
+-.reveal-ready.is-visible { opacity: 1; transform: translateY(0) }
+-.reveal-ready .grid > .card { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s cubic-bezier(.2,.75,.25,1), box-shadow .25s ease }
+-.reveal-ready.is-visible .grid > .card { opacity: 1; transform: translateY(0) }
+-.reveal-ready.is-visible .grid > .card:hover { transform: translateY(-6px) }
+-.reveal-ready.is-visible .grid > .card:nth-child(2) { transition-delay: .1s }
+-.reveal-ready.is-visible .grid > .card:nth-child(3) { transition-delay: .2s }
+-.reveal-ready.is-visible .grid > .card:nth-child(4) { transition-delay: .3s }
+-@keyframes hero-enter { from { opacity: .5 } to { opacity: 1 } }
+-@keyframes hero-copy-enter { from { opacity: 0; transform: translateY(22px) } to { opacity: 1; transform: translateY(0) } }
++.hero-copy { animation: hero-copy-enter 500ms var(--ease-out) both }
++.reveal-ready { opacity: 0; transition: opacity 400ms var(--ease-out) }
++.reveal-ready.is-visible { opacity: 1 }
++.reveal-ready.is-visible .grid > .card { animation: card-in 400ms var(--ease-out) backwards }
++.reveal-ready.is-visible .grid > .card:nth-child(2) { animation-delay: 50ms }
++.reveal-ready.is-visible .grid > .card:nth-child(3) { animation-delay: 100ms }
++.reveal-ready.is-visible .grid > .card:nth-child(4) { animation-delay: 150ms }
++.reveal-ready.is-visible .grid > .card:nth-child(5) { animation-delay: 200ms }
++.reveal-ready.is-visible .grid > .card:nth-child(n+6) { animation-delay: 250ms }
++@keyframes card-in { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: none } }
++@keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
++@keyframes hero-copy-enter { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: none } }
+ 
+-.rows > div { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; padding: 26px 24px; border-top: 1px solid var(--concrete); transition: background .2s ease, padding .2s ease }
+-.rows > div:hover { padding-right: 30px; padding-left: 30px; background: rgba(255,255,255,.65) }
++.rows > div { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; padding: 26px 24px; border-top: 1px solid var(--concrete); transition: background-color .2s ease }
++@media (hover: hover) and (pointer: fine) { .rows > div:hover { background: rgba(255,255,255,.65) } }
+ .rows > div:last-child { border-bottom: 1px solid var(--concrete) }
+ .rows h2, .rows h3 { margin: 0 }
+ .rows p:last-child { margin-bottom: 0 }
+ @media (max-width: 700px) { .rows > div { grid-template-columns: 1fr; gap: 12px } }
+ 
+ .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 26px }
+-.card { display: block; overflow: hidden; text-decoration: none; background: var(--white); border: 1px solid rgba(23,50,77,.09); border-radius: 4px; box-shadow: 0 8px 26px rgba(23,50,77,.055); transition: transform .25s ease, box-shadow .25s ease }
+-.card:hover { transform: translateY(-6px); box-shadow: 0 18px 38px rgba(23,50,77,.14) }
+-.card:hover h3 { color: #9c6710 }
++.card { display: block; overflow: hidden; text-decoration: none; background: var(--white); border: 1px solid rgba(23,50,77,.09); border-radius: 4px; box-shadow: 0 8px 26px rgba(23,50,77,.055); transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out) }
++@media (hover: hover) and (pointer: fine) {
++  .card:hover { transform: translateY(-6px); box-shadow: 0 18px 38px rgba(23,50,77,.14) }
++  .card:hover h3 { color: #9c6710 }
++  .card:hover .thumb img { transform: scale(1.045) }
++}
+ .card .body { padding: 20px 20px 22px }
+ .card h3 { margin-bottom: 8px; transition: color .2s ease }
+ .card p { margin: 0; color: var(--steel); font-size: .94rem }
+-.thumb { aspect-ratio: 4 / 3; overflow: hidden }
++.thumb { aspect-ratio: 4 / 3; overflow: hidden; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 28px 28px }
+ .thumb.wide { aspect-ratio: 16 / 8 }
+-.thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease }
+-.card:hover .thumb img { transform: scale(1.045) }
++.thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 300ms var(--ease-out), opacity 200ms ease }
++.thumb img:not(.loaded) { opacity: 0 }
+ 
+ .filters { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px }
+-.filters button { padding: 9px 17px; border: 1px solid var(--concrete); border-radius: 99px; background: rgba(255,255,255,.65); color: inherit; font: 600 .9rem 'Public Sans', sans-serif; cursor: pointer; transition: all .2s ease }
+-.filters button:hover { border-color: var(--ink) }
++.filters button { padding: 9px 17px; border: 1px solid var(--concrete); border-radius: 99px; background: rgba(255,255,255,.65); color: inherit; font: 600 .9rem 'Public Sans', sans-serif; cursor: pointer; transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform 160ms var(--ease-out) }
++@media (hover: hover) and (pointer: fine) { .filters button:hover { border-color: var(--ink) } }
+ .filters button[aria-pressed='true'] { border-color: var(--ink); background: var(--ink); color: #fff }
++.filters button:active { transform: scale(.97) }
+ 
+ .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 0; list-style: none; counter-reset: step }
+ .steps li { min-height: 190px; padding: 24px; background: var(--white); border: 1px solid rgba(23,50,77,.08); border-radius: 4px; box-shadow: 0 8px 24px rgba(23,50,77,.045) }
+@@ -138,15 +148,22 @@ ul { padding-left: 1.2em }
+   .hero h1 { font-size: clamp(2.7rem, 12vw, 4rem) }
+   .hero .lead { font-size: 1.08rem }
+   .hero::after { right: -220px; bottom: -90px }
+-  .rows > div:hover { padding-right: 24px; padding-left: 24px }
+   .form { padding: 20px }
+   .stats div { flex: 1 1 130px; min-width: 0; padding: 18px }
+   .foot { align-items: flex-start; flex-direction: column }
+ }
+ 
++.swap-enter-active { transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out) }
++.swap-leave-active { transition: opacity 120ms ease-out }
++.swap-enter-from { opacity: 0; transform: translateY(6px) }
++.swap-leave-to { opacity: 0 }
++
+ @media (prefers-reduced-motion: reduce) {
+   html { scroll-behavior: auto }
+-  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important }
+-  .reveal-ready { opacity: 1; transform: none }
+-  .reveal-ready .grid > .card { opacity: 1; transform: none }
++  *, *::before, *::after { scroll-behavior: auto !important }
++  .btn:hover, .btn:active, .btn-line:active, .menu:active, .filters button:active, .card:hover { transform: none }
++  .card:hover .thumb img { transform: none }
++  .site-header nav { transform: none }
++  .swap-enter-from { transform: none }
++  .hero-copy { animation: fade-in 250ms ease-out both }
+ }
+diff --git a/src/components/AppHeader.vue b/src/components/AppHeader.vue
+index a608a0c..8691576 100644
+--- a/src/components/AppHeader.vue
++++ b/src/components/AppHeader.vue
+@@ -8,8 +8,8 @@ const links = [['/', 'Home'], ['/services', 'Services'], ['/projects', 'Projects
+   <header class="site-header">
+     <div class="wrap bar">
+       <RouterLink to="/" class="logo">{{ company.name }}</RouterLink>
+-      <button class="menu" :aria-expanded="open" @click="open = !open">Menu</button>
+-      <nav :class="{ open }" @click="open = false">
++      <button class="menu" aria-controls="site-nav" :aria-expanded="open" @click="open = !open">Menu</button>
++      <nav id="site-nav" :class="{ open }" @click="open = false">
+         <RouterLink v-for="[to, label] in links" :key="to" :to="to">{{ label }}</RouterLink>
+         <RouterLink to="/contact" class="btn">Request a quote</RouterLink>
+       </nav>
+diff --git a/src/components/BeforeAfter.vue b/src/components/BeforeAfter.vue
+index 24a9a65..a44c492 100644
+--- a/src/components/BeforeAfter.vue
++++ b/src/components/BeforeAfter.vue
+@@ -2,16 +2,40 @@
+ import { ref } from 'vue'
+ defineProps({ before: String, after: String })
+ const pos = ref(50)
++const frame = ref(null)
++let dragging = false
++
++function setFromEvent(e) {
++  const r = frame.value.getBoundingClientRect()
++  pos.value = Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100))
++}
++function down(e) {
++  dragging = true
++  frame.value.setPointerCapture(e.pointerId)
++  setFromEvent(e)
++}
++function move(e) {
++  if (dragging) setFromEvent(e)
++}
++function up() {
++  dragging = false
++}
+ </script>
+ <template>
+-  <div class="ba">
+-    <img :src="after" alt="After renovation" />
+-    <img :src="before" alt="Before renovation" :style="{ clipPath: `inset(0 ${100 - pos}% 0 0)` }" />
++  <div ref="frame" class="ba" @pointerdown="down" @pointermove="move" @pointerup="up" @pointercancel="up">
++    <img :src="after" alt="After renovation" draggable="false" />
++    <img :src="before" alt="Before renovation" draggable="false" :style="{ clipPath: `inset(0 ${100 - pos}% 0 0)` }" />
++    <span class="divider" :style="{ left: pos + '%' }" aria-hidden="true"><i></i></span>
+     <input v-model.number="pos" type="range" min="0" max="100" aria-label="Compare before and after" />
+   </div>
+ </template>
+ <style scoped>
+-.ba { position: relative; aspect-ratio: 16/9; background: var(--concrete); overflow: hidden }
+-.ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+-.ba input { position: absolute; left: 5%; bottom: 12px; width: 90% }
++.ba { position: relative; aspect-ratio: 16/9; background: var(--concrete); overflow: hidden; cursor: ew-resize; user-select: none; touch-action: pan-y }
++.ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none }
++.divider { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; transform: translateX(-1px); box-shadow: 0 0 0 1px rgba(10, 26, 41, .18); pointer-events: none }
++.divider i { position: absolute; top: 50%; left: 50%; width: 38px; height: 38px; margin: -19px 0 0 -19px; border-radius: 50%; background: #fff; box-shadow: 0 2px 12px rgba(10, 26, 41, .35); transition: transform 160ms var(--ease-out) }
++.divider i::before { content: '\2039 \203A'; position: absolute; inset: 0; display: grid; place-items: center; color: var(--ink); font: 600 1.1rem/1 'Public Sans', sans-serif; letter-spacing: .15em; padding-left: .15em }
++.ba:active .divider i { transform: scale(.94) }
++.ba input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none }
++.ba:has(input:focus-visible) .divider i { outline: 3px solid var(--signal); outline-offset: 2px }
+ </style>
+diff --git a/src/components/ProjectCard.vue b/src/components/ProjectCard.vue
+index 31793fd..f859007 100644
+--- a/src/components/ProjectCard.vue
++++ b/src/components/ProjectCard.vue
+@@ -4,7 +4,7 @@ defineProps({ project: { type: Object, required: true } })
+ <template>
+   <RouterLink :to="`/projects/${project.id}`" class="card">
+     <div class="thumb">
+-      <img :src="project.image" :alt="project.title" loading="lazy" @error="$event.target.style.display = 'none'" />
++      <img :src="project.image" :alt="project.title" loading="lazy" @load="$event.target.classList.add('loaded')" @error="$event.target.style.display = 'none'" />
+     </div>
+     <div class="body">
+       <h3>{{ project.title }}</h3>
+diff --git a/src/components/QuoteForm.vue b/src/components/QuoteForm.vue
+index 0541005..416a545 100644
+--- a/src/components/QuoteForm.vue
++++ b/src/components/QuoteForm.vue
+@@ -2,30 +2,38 @@
+ import { reactive, ref } from 'vue'
+ const form = reactive({ name: '', phone: '', email: '', type: 'New build', size: '', budget: '', message: '' })
+ const sent = ref(false)
+-function submit() {
+-  // TODO: send `form` to your backend, Formspree or a Firebase function
+-  console.log(form)
+-  sent.value = true
++const sending = ref(false)
++async function submit() {
++  if (sending.value) return
++  sending.value = true
++  try {
++    // TODO: await fetch(...) to your backend, Formspree or a Firebase function with `form`
++    sent.value = true
++  } finally {
++    sending.value = false
++  }
+ }
+ </script>
+ <template>
+-  <p v-if="sent" class="sent" role="status">Thank you, {{ form.name }}. We will reply within two working days.</p>
+-  <form v-else class="form" @submit.prevent="submit">
+-    <label>Name<input v-model="form.name" required autocomplete="name" /></label>
+-    <label>Phone<input v-model="form.phone" type="tel" required autocomplete="tel" /></label>
+-    <label>Email<input v-model="form.email" type="email" autocomplete="email" /></label>
+-    <label>Project type
+-      <select v-model="form.type">
+-        <option>New build</option><option>Renovation</option><option>Roofing</option><option>Interior finishing</option>
+-      </select>
+-    </label>
+-    <label>Approximate size in m²<input v-model="form.size" type="number" min="1" /></label>
+-    <label>Budget
+-      <select v-model="form.budget">
+-        <option value="">Not sure yet</option><option>Up to 50,000 EUR</option><option>50,000 to 150,000 EUR</option><option>Over 150,000 EUR</option>
+-      </select>
+-    </label>
+-    <label>Tell us about the project<textarea v-model="form.message" rows="4"></textarea></label>
+-    <button class="btn" type="submit">Send request</button>
+-  </form>
++  <Transition name="swap" mode="out-in">
++    <p v-if="sent" key="sent" class="sent" role="status">Thank you, {{ form.name }}. We will reply within two working days.</p>
++    <form v-else key="form" class="form" :aria-busy="sending" @submit.prevent="submit">
++      <label>Name<input v-model="form.name" required autocomplete="name" /></label>
++      <label>Phone<input v-model="form.phone" type="tel" required autocomplete="tel" /></label>
++      <label>Email<input v-model="form.email" type="email" autocomplete="email" /></label>
++      <label>Project type
++        <select v-model="form.type">
++          <option>New build</option><option>Renovation</option><option>Roofing</option><option>Interior finishing</option>
++        </select>
++      </label>
++      <label>Approximate size in m²<input v-model="form.size" type="number" min="1" /></label>
++      <label>Budget
++        <select v-model="form.budget">
++          <option value="">Not sure yet</option><option>Up to 50,000 EUR</option><option>50,000 to 150,000 EUR</option><option>Over 150,000 EUR</option>
++        </select>
++      </label>
++      <label>Tell us about the project<textarea v-model="form.message" rows="4"></textarea></label>
++      <button class="btn" type="submit" :disabled="sending">{{ sending ? 'Sending…' : 'Send request' }}</button>
++    </form>
++  </Transition>
+ </template>
+diff --git a/src/pages/AboutPage.vue b/src/pages/AboutPage.vue
+index 3ca88b7..367bbe6 100644
+--- a/src/pages/AboutPage.vue
++++ b/src/pages/AboutPage.vue
+@@ -5,7 +5,7 @@ const team = [['Georgi Orlov', 'Founder and general manager'], ['Maria Petrova',
+ const certs = ['Licensed contractor, Class III', 'ISO 9001 quality management', 'Occupational health and safety certified']
+ </script>
+ <template>
+-  <div v-reveal class="wrap page-head">
++  <div class="wrap page-head">
+     <h1>About {{ company.name }}</h1>
+     <p class="lead">We started in 2008 as a four-person renovation crew in Sofia. Today we build houses, offices and warehouses across the country.</p>
+     <p>We keep our own crews instead of subcontracting everything, so the people who quote the job are the people who deliver it.</p>
+diff --git a/src/pages/ContactPage.vue b/src/pages/ContactPage.vue
+index cf034ca..6ce2c65 100644
+--- a/src/pages/ContactPage.vue
++++ b/src/pages/ContactPage.vue
+@@ -3,8 +3,8 @@ import QuoteForm from '../components/QuoteForm.vue'
+ import { company } from '../data/company'
+ </script>
+ <template>
+-  <div v-reveal class="wrap page-head"><h1>Request a quote</h1><p class="lead">Describe your project and we will reply within two working days.</p></div>
+-  <section v-reveal class="wrap section two">
++  <div class="wrap page-head"><h1>Request a quote</h1><p class="lead">Describe your project and we will reply within two working days.</p></div>
++  <section class="wrap section two">
+     <QuoteForm />
+     <div>
+       <h2>Prefer to call?</h2>
+diff --git a/src/pages/ProjectDetailPage.vue b/src/pages/ProjectDetailPage.vue
+index ee882ec..7a4c0a3 100644
+--- a/src/pages/ProjectDetailPage.vue
++++ b/src/pages/ProjectDetailPage.vue
+@@ -7,12 +7,12 @@ const route = useRoute()
+ const p = computed(() => projects.find(x => x.id === route.params.id))
+ </script>
+ <template>
+-  <article v-if="p" v-reveal class="wrap page-head">
++  <article v-if="p" class="wrap page-head">
+     <h1>{{ p.title }}</h1>
+     <p class="lead">{{ p.summary }}</p>
+     <BeforeAfter v-if="p.before" :before="p.before" :after="p.image" />
+     <div v-else class="thumb wide">
+-      <img :src="p.image" :alt="p.title" @error="$event.target.style.display = 'none'" />
++      <img :src="p.image" :alt="p.title" @load="$event.target.classList.add('loaded')" @error="$event.target.style.display = 'none'" />
+     </div>
+     <dl class="specs">
+       <div><dt>Location</dt><dd>{{ p.place }}</dd></div>
+diff --git a/src/pages/ProjectsPage.vue b/src/pages/ProjectsPage.vue
+index 31625d1..7b5f108 100644
+--- a/src/pages/ProjectsPage.vue
++++ b/src/pages/ProjectsPage.vue
+@@ -6,7 +6,7 @@ const active = ref('All')
+ const shown = computed(() => active.value === 'All' ? projects : projects.filter(p => p.type === active.value))
+ </script>
+ <template>
+-  <div v-reveal class="wrap page-head">
++  <div class="wrap page-head">
+     <h1>Projects</h1>
+     <div class="filters">
+       <button v-for="t in projectTypes" :key="t" :aria-pressed="active === t" @click="active = t">{{ t }}</button>
+diff --git a/src/pages/ServicesPage.vue b/src/pages/ServicesPage.vue
+index 33545fd..87b408d 100644
+--- a/src/pages/ServicesPage.vue
++++ b/src/pages/ServicesPage.vue
+@@ -2,7 +2,7 @@
+ import { services } from '../data/services'
+ </script>
+ <template>
+-  <div v-reveal class="wrap page-head">
++  <div class="wrap page-head">
+     <h1>Services</h1>
+     <p class="lead">Four kinds of work, all done by our own crews.</p>
+   </div>
+diff --git a/src/router.js b/src/router.js
+index abb9ac9..1996dc2 100644
+--- a/src/router.js
++++ b/src/router.js
+@@ -8,7 +8,7 @@ import ContactPage from './pages/ContactPage.vue'
+ 
+ export default createRouter({
+   history: createWebHistory(),
+-  scrollBehavior: () => ({ top: 0 }),
++  scrollBehavior: (to, from, saved) => saved || { top: 0, behavior: 'instant' },
+   routes: [
+     { path: '/', component: HomePage },
+     { path: '/services', component: ServicesPage },

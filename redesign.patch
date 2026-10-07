@@ -1,0 +1,529 @@
+diff --git a/src/assets/main.css b/src/assets/main.css
+index 06a4f88..c3227ec 100644
+--- a/src/assets/main.css
++++ b/src/assets/main.css
+@@ -1,8 +1,8 @@
+-:root { --ink: #17324d; --paper: #f5f4f0; --concrete: #d9ddde; --steel: #56656f; --signal: #e8a317; --white: #fff; --ease-out: cubic-bezier(0.23, 1, 0.32, 1) }
++:root { --ink: #17324d; --paper: #edf0f1; --deep: #0b1c2c; --concrete: #d3d8da; --steel: #56656f; --signal: #e8a317; --white: #fff; --ease-out: cubic-bezier(0.23, 1, 0.32, 1) }
+ * { box-sizing: border-box }
+ html { scroll-behavior: smooth }
+ body { margin: 0; font: 400 1.0625rem/1.65 'Public Sans', system-ui, sans-serif; color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased }
+-h1, h2, h3, .logo, dt { font-family: 'Barlow Condensed', sans-serif; font-weight: 600 }
++h1, h2, h3, .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 600 }
+ h1, h2, h3 { line-height: 1.05; margin: 0 0 .55em; letter-spacing: -.015em }
+ h1 { font-size: clamp(3rem, 6.4vw, 5.2rem) }
+ h2 { font-size: clamp(2rem, 4vw, 3rem) }
+@@ -14,14 +14,13 @@ img { max-width: 100% }
+ .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px }
+ .section { padding-top: 88px; padding-bottom: 88px }
+ .page-head { padding-top: 72px; padding-bottom: 32px }
++.page-head + .section { padding-top: 40px }
+ .lead { font-size: 1.25rem }
+ .more { margin-top: 28px }
+-.section > h2 { position: relative; margin-bottom: 32px }
+-.section > h2::after { content: ''; display: block; width: 48px; height: 4px; margin-top: 14px; background: var(--signal) }
+-.eyebrow { margin-bottom: 18px; color: var(--signal); font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase }
++.section > h2 { margin-bottom: 32px }
+ 
+-.btn, .btn-line { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 24px; font-size: .96rem; font-weight: 600; font-family: inherit; text-decoration: none; border: 1px solid var(--signal); border-radius: 3px; cursor: pointer; transition: background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease, transform 160ms var(--ease-out) }
+-.btn { background: var(--signal); color: var(--ink); box-shadow: 0 5px 16px rgba(232, 163, 23, .18) }
++.btn, .btn-line { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 24px; font-size: .96rem; font-weight: 600; font-family: inherit; text-decoration: none; border: 1px solid var(--signal); border-radius: 2px; cursor: pointer; transition: background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease, transform 160ms var(--ease-out) }
++.btn { background: var(--signal); color: var(--ink) }
+ .btn-line { color: #fff; border-color: rgba(255,255,255,.72); background: rgba(255,255,255,.06) }
+ @media (hover: hover) and (pointer: fine) {
+   .btn:hover { background: #f5b72e; border-color: #f5b72e; transform: translateY(-2px) }
+@@ -31,7 +30,7 @@ img { max-width: 100% }
+ .btn:disabled { opacity: .65; cursor: default; transform: none }
+ .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px }
+ 
+-.site-header { position: sticky; top: 0; z-index: 5; background: rgba(245,244,240,.94); border-bottom: 1px solid rgba(23,50,77,.1); backdrop-filter: blur(14px) }
++.site-header { position: sticky; top: 0; z-index: 5; background: rgba(237,240,241,.94); border-bottom: 1px solid rgba(23,50,77,.1); backdrop-filter: blur(14px) }
+ .bar { display: flex; align-items: center; justify-content: space-between; height: 76px }
+ .logo { position: relative; padding-left: 40px; font-size: 1.8rem; letter-spacing: .01em; text-decoration: none }
+ .logo::before { content: ''; position: absolute; left: 0; top: 50%; width: 29px; height: 29px; transform: translateY(-50%); background: var(--signal); clip-path: polygon(50% 0, 100% 28%, 100% 100%, 0 100%, 0 28%) }
+@@ -40,12 +39,12 @@ img { max-width: 100% }
+ .site-header nav a:not(.btn) { position: relative; padding: 8px 0; font-size: .95rem; font-weight: 600; text-decoration: none; color: #45596a; transition: color .2s ease }
+ .site-header nav a.router-link-exact-active:not(.btn) { color: var(--ink) }
+ @media (hover: hover) and (pointer: fine) { .site-header nav a:not(.btn):hover { color: var(--ink) } }
+-.site-header nav a.router-link-exact-active:not(.btn)::after { content: ''; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: var(--signal) }
++.site-header nav a.router-link-exact-active:not(.btn)::after { content: ''; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: var(--ink) }
+ .site-header nav .btn { min-height: 44px; padding: 9px 17px }
+ .menu { display: none }
+ @media (max-width: 760px) {
+   .bar { height: 68px }
+-  .menu { display: block; background: transparent; border: 1px solid var(--concrete); border-radius: 3px; padding: 7px 13px; font: 600 .9rem 'Public Sans', sans-serif; color: inherit; transition: transform 160ms var(--ease-out) }
++  .menu { display: block; background: transparent; border: 1px solid var(--concrete); border-radius: 2px; padding: 7px 13px; font: 600 .9rem 'Public Sans', sans-serif; color: inherit; transition: transform 160ms var(--ease-out) }
+   .menu:active { transform: scale(.97) }
+   .site-header nav { position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 8px; padding: 18px 20px 22px; background: var(--paper); border-bottom: 1px solid var(--concrete); box-shadow: 0 14px 20px rgba(23,50,77,.1); visibility: hidden; opacity: 0; transform: translateY(-8px); transform-origin: top; pointer-events: none; transition: opacity 120ms var(--ease-out), transform 120ms var(--ease-out), visibility 0s linear 120ms }
+   .site-header nav.open { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), visibility 0s }
+@@ -53,27 +52,14 @@ img { max-width: 100% }
+   .site-header nav .btn { margin-top: 6px }
+ }
+ 
+-.hero, .thumb { background-color: var(--ink) }
+-.hero { position: relative; display: flex; align-items: center; min-height: 590px; overflow: hidden; color: #fff; background-image: linear-gradient(90deg, rgba(10,26,41,.9) 0%, rgba(10,26,41,.73) 47%, rgba(10,26,41,.12) 100%), url('./images/hero.jpeg'); background-position: center 55%; background-size: cover }
+-.hero::after { content: ''; position: absolute; right: 6%; bottom: -110px; width: 340px; height: 340px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; box-shadow: 0 0 0 36px rgba(255,255,255,.04), 0 0 0 72px rgba(255,255,255,.03); pointer-events: none }
+-.hero .wrap { position: relative; z-index: 1; width: 100%; padding-top: 104px; padding-bottom: 104px }
+-.hero .wrap > div { max-width: 690px }
+-.hero h1 { max-width: 18ch; margin-bottom: 22px; text-wrap: balance }
+-.hero .lead { max-width: 52ch; color: rgba(255,255,255,.84) }
+-.hero .eyebrow { display: flex; align-items: center; gap: 10px }
+-.hero .eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--signal) }
+-.hero-copy { animation: hero-copy-enter 500ms var(--ease-out) both }
+-.reveal-ready { opacity: 0; transition: opacity 400ms var(--ease-out) }
+-.reveal-ready.is-visible { opacity: 1 }
+-.reveal-ready.is-visible .grid > .card { animation: card-in 400ms var(--ease-out) backwards }
+-.reveal-ready.is-visible .grid > .card:nth-child(2) { animation-delay: 50ms }
+-.reveal-ready.is-visible .grid > .card:nth-child(3) { animation-delay: 100ms }
+-.reveal-ready.is-visible .grid > .card:nth-child(4) { animation-delay: 150ms }
+-.reveal-ready.is-visible .grid > .card:nth-child(5) { animation-delay: 200ms }
+-.reveal-ready.is-visible .grid > .card:nth-child(n+6) { animation-delay: 250ms }
+-@keyframes card-in { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: none } }
+-@keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+-@keyframes hero-copy-enter { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: none } }
++.hero { color: #fff; background: var(--deep) }
++.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 56px; align-items: center; min-height: 560px; padding-top: 88px; padding-bottom: 88px }
++.hero h1 { max-width: 14ch; margin-bottom: 22px; font-size: clamp(2.8rem, 5vw, 4.4rem); text-wrap: balance }
++.hero .lead { max-width: 44ch; color: rgba(255,255,255,.82) }
++@media (max-width: 900px) {
++  .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 36px; min-height: 0; padding-top: 32px; padding-bottom: 56px }
++  .hero .plate { order: -1 }
++}
+ 
+ .rows > div { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; padding: 26px 24px; border-top: 1px solid var(--concrete); transition: background-color .2s ease }
+ @media (hover: hover) and (pointer: fine) { .rows > div:hover { background: rgba(255,255,255,.65) } }
+@@ -82,19 +68,29 @@ img { max-width: 100% }
+ .rows p:last-child { margin-bottom: 0 }
+ @media (max-width: 700px) { .rows > div { grid-template-columns: 1fr; gap: 12px } }
+ 
+-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 26px }
+-.card { display: block; overflow: hidden; text-decoration: none; background: var(--white); border: 1px solid rgba(23,50,77,.09); border-radius: 4px; box-shadow: 0 8px 26px rgba(23,50,77,.055); transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out) }
+-@media (hover: hover) and (pointer: fine) {
+-  .card:hover { transform: translateY(-6px); box-shadow: 0 18px 38px rgba(23,50,77,.14) }
+-  .card:hover h3 { color: #9c6710 }
+-  .card:hover .thumb img { transform: scale(1.045) }
++.register { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid var(--concrete) }
++.reg-row { border-top: 1px solid var(--concrete) }
++.reg-row a { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 28px; align-items: center; padding: 20px 24px; text-decoration: none; transition: background-color .2s ease }
++@media (hover: hover) and (pointer: fine) { .reg-row a:hover { background: rgba(255,255,255,.65) } }
++.reg-title h3 { margin: 0 0 4px; font-size: 1.7rem }
++.reg-title p { margin: 0; color: var(--steel); font-size: .95rem }
++.reg-row .specs { display: grid; grid-template-columns: 110px 120px 64px; gap: 12px 28px; margin: 0; padding: 0; border: 0; justify-content: end }
++@media (max-width: 900px) {
++  .reg-row a { grid-template-columns: 180px minmax(0, 1fr) }
++  .reg-row .thumb { grid-row: 1 / span 2 }
++  .reg-row .specs { grid-column: 2; justify-content: start }
+ }
+-.card .body { padding: 20px 20px 22px }
+-.card h3 { margin-bottom: 8px; transition: color .2s ease }
+-.card p { margin: 0; color: var(--steel); font-size: .94rem }
+-.thumb { aspect-ratio: 4 / 3; overflow: hidden; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 28px 28px }
++@media (max-width: 560px) {
++  .reg-row a { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 20px 0 }
++  .reg-row .thumb { grid-row: auto; aspect-ratio: 16 / 9 }
++  .reg-row .specs { grid-column: auto; grid-template-columns: repeat(3, auto); justify-content: start }
++}
++.reg-enter-active { transition: opacity 150ms var(--ease-out) }
++.reg-enter-from { opacity: 0 }
++
++.thumb { aspect-ratio: 4 / 3; overflow: hidden; background-color: var(--ink); background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 28px 28px }
+ .thumb.wide { aspect-ratio: 16 / 8 }
+-.thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 300ms var(--ease-out), opacity 200ms ease }
++.thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: opacity 200ms ease }
+ .thumb img:not(.loaded) { opacity: 0 }
+ 
+ .filters { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px }
+@@ -103,38 +99,37 @@ img { max-width: 100% }
+ .filters button[aria-pressed='true'] { border-color: var(--ink); background: var(--ink); color: #fff }
+ .filters button:active { transform: scale(.97) }
+ 
+-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 0; list-style: none; counter-reset: step }
+-.steps li { min-height: 190px; padding: 24px; background: var(--white); border: 1px solid rgba(23,50,77,.08); border-radius: 4px; box-shadow: 0 8px 24px rgba(23,50,77,.045) }
+-.steps li::before { counter-increment: step; content: '0' counter(step); display: block; margin-bottom: 22px; font: 600 2.2rem/1 'Barlow Condensed', sans-serif; color: #b77b11 }
++.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 32px; padding: 0; list-style: none; counter-reset: step }
++.steps li { padding-top: 18px; border-top: 2px solid var(--ink) }
++.steps li::before { counter-increment: step; content: '0' counter(step); display: block; margin-bottom: 14px; font: 600 1.6rem/1 'Barlow Condensed', sans-serif; color: var(--steel) }
+ .steps h3 { font-size: 1.35rem }
+ .steps p { margin: 0; color: var(--steel); font-size: .95rem }
+ 
+-.band { position: relative; overflow: hidden; padding: 76px 0; color: #fff; background: var(--ink) }
+-.band::after { content: ''; position: absolute; top: -170px; right: 8%; width: 400px; height: 400px; border: 1px solid rgba(255,255,255,.14); border-radius: 50%; box-shadow: 0 0 0 44px rgba(255,255,255,.035), 0 0 0 88px rgba(255,255,255,.025); pointer-events: none }
+-.band .wrap { position: relative; z-index: 1 }
++.band { padding: 76px 0; color: #fff; background: var(--ink) }
+ .band h2 { max-width: 20ch }
+ .band p { color: rgba(255,255,255,.75) }
+ 
+-.stats, .specs { display: flex; flex-wrap: wrap; gap: 12px; margin: 36px 0 }
+-.stats div, .specs div { margin: 0 }
+-.stats div { min-width: 160px; padding: 20px 24px; background: var(--white); border: 1px solid rgba(23,50,77,.08); border-radius: 4px; box-shadow: 0 8px 24px rgba(23,50,77,.045) }
+-.stats dt { font-size: 3.2rem; line-height: 1; color: #a56c09 }
+-.stats dd, .specs dd { margin: 0; color: var(--steel) }
+-.specs { justify-content: space-between; padding: 20px 0; border-top: 1px solid var(--concrete); border-bottom: 1px solid var(--concrete) }
+-.specs dt { font-size: 1.3rem }
++.specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 16px 24px; margin: 28px 0; padding: 20px 0; border-top: 1px solid var(--concrete); border-bottom: 1px solid var(--concrete) }
++.specs div { margin: 0 }
++.specs dt { margin-bottom: 2px; font: 600 .82rem/1.3 'Public Sans', sans-serif; color: var(--steel) }
++.specs dd { margin: 0; font: 600 1.6rem/1.1 'Barlow Condensed', sans-serif; white-space: nowrap }
+ .two { display: grid; grid-template-columns: 1fr 1fr; gap: 56px }
+ @media (max-width: 800px) { .two { grid-template-columns: 1fr } }
+ ul { padding-left: 1.2em }
+ 
+-.form { display: grid; gap: 17px; max-width: 560px; padding: 28px; background: var(--white); border: 1px solid rgba(23,50,77,.08); border-radius: 4px; box-shadow: 0 10px 32px rgba(23,50,77,.07) }
++.form { display: grid; gap: 17px; max-width: 560px; padding: 28px; background: var(--white); border: 1px solid var(--concrete); border-radius: 2px }
+ .form label { display: grid; gap: 7px; font-size: .94rem; font-weight: 600 }
+-.form input, .form select, .form textarea { width: 100%; font: 400 1rem 'Public Sans', sans-serif; padding: 11px 12px; border: 1px solid #c7ced1; border-radius: 3px; background: #fcfcfb; color: inherit; transition: border-color .2s ease, box-shadow .2s ease }
++.form input, .form select, .form textarea { width: 100%; font: 400 1rem 'Public Sans', sans-serif; padding: 11px 12px; border: 1px solid #c7ced1; border-radius: 2px; background: #fcfcfb; color: inherit; transition: border-color .2s ease, box-shadow .2s ease }
+ .form input:focus, .form select:focus, .form textarea:focus { border-color: #b77b11; outline: 0; box-shadow: 0 0 0 3px rgba(232,163,23,.15) }
+ .form textarea { resize: vertical }
+ .form .btn { justify-self: start }
+-.sent { padding: 24px; background: #e8f1e9; border-left: 4px solid #477b4e; border-radius: 3px }
++.sent { padding: 24px; background: #e8f1e9; border-left: 4px solid #477b4e; border-radius: 2px }
++.swap-enter-active { transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out) }
++.swap-leave-active { transition: opacity 120ms ease-out }
++.swap-enter-from { opacity: 0; transform: translateY(6px) }
++.swap-leave-to { opacity: 0 }
+ 
+-.site-footer { background: #10283f; color: #cfdbe6; padding: 52px 0 }
++.site-footer { background: var(--deep); color: #cfdbe6; padding: 52px 0 }
+ .foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap }
+ .site-footer strong { font: 600 1.5rem 'Barlow Condensed', sans-serif; color: #fff }
+ .site-footer p { margin: 8px 0 0; font-size: .92rem }
+@@ -143,27 +138,17 @@ ul { padding-left: 1.2em }
+ @media (max-width: 600px) {
+   .section { padding-top: 64px; padding-bottom: 64px }
+   .page-head { padding-top: 52px; padding-bottom: 24px }
+-  .hero { min-height: 560px; background-image: linear-gradient(90deg, rgba(10,26,41,.84), rgba(10,26,41,.53)), url('./images/hero.jpeg'); background-position: 58% center }
+-  .hero .wrap { padding-top: 76px; padding-bottom: 76px }
+-  .hero h1 { font-size: clamp(2.7rem, 12vw, 4rem) }
++  .page-head + .section { padding-top: 24px }
++  .hero .wrap { padding-top: 24px; padding-bottom: 48px }
++  .hero h1 { font-size: clamp(2.7rem, 12vw, 3.6rem) }
+   .hero .lead { font-size: 1.08rem }
+-  .hero::after { right: -220px; bottom: -90px }
+   .form { padding: 20px }
+-  .stats div { flex: 1 1 130px; min-width: 0; padding: 18px }
+   .foot { align-items: flex-start; flex-direction: column }
+ }
+ 
+-.swap-enter-active { transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out) }
+-.swap-leave-active { transition: opacity 120ms ease-out }
+-.swap-enter-from { opacity: 0; transform: translateY(6px) }
+-.swap-leave-to { opacity: 0 }
+-
+ @media (prefers-reduced-motion: reduce) {
+   html { scroll-behavior: auto }
+-  *, *::before, *::after { scroll-behavior: auto !important }
+-  .btn:hover, .btn:active, .btn-line:active, .menu:active, .filters button:active, .card:hover { transform: none }
+-  .card:hover .thumb img { transform: none }
++  .btn:hover, .btn:active, .btn-line:active, .menu:active, .filters button:active { transform: none }
+   .site-header nav { transform: none }
+   .swap-enter-from { transform: none }
+-  .hero-copy { animation: fade-in 250ms ease-out both }
+ }
+diff --git a/src/components/HeroBlueprint.vue b/src/components/HeroBlueprint.vue
+index a597091..57b3a9a 100644
+--- a/src/components/HeroBlueprint.vue
++++ b/src/components/HeroBlueprint.vue
+@@ -1,32 +1,61 @@
++<script setup>
++defineProps({ photo: { type: String, required: true } })
++
++// Play the plan-to-photo sequence once per session; later visits and reduced motion show the end state.
++let settled = false
++try {
++  settled = window.matchMedia('(prefers-reduced-motion: reduce)').matches || sessionStorage.getItem('hero-plate-seen') === '1'
++  sessionStorage.setItem('hero-plate-seen', '1')
++} catch {}
++</script>
++
+ <template>
+-  <svg viewBox="0 0 520 350" role="img" aria-label="Blueprint drawing of a house with dimensions" class="bp">
+-    <g class="draw">
+-      <path d="M20 290H500" />
+-      <path d="M120 290V170H400V290" />
+-      <path d="M100 170L260 80L420 170Z" />
+-      <path d="M240 290V220H280V290" />
+-      <path d="M150 200H210V250H150Z M310 200H370V250H310Z" />
+-      <path d="M340 125V90H370V143" />
+-    </g>
+-    <g class="draw dim">
+-      <path d="M120 315H400 M120 308V322 M400 308V322" />
+-      <path d="M450 80V290 M443 80H457 M443 290H457" />
+-      <text x="260" y="340" text-anchor="middle">14.00 m</text>
+-      <text x="466" y="190" transform="rotate(90 466 190)" text-anchor="middle">9.20 m</text>
+-    </g>
+-  </svg>
++  <div class="plate" :class="{ 'is-settled': settled }">
++    <img class="photo" :src="photo" alt="Two-storey family house with a brick and glass facade, lit at dusk" fetchpriority="high" />
++    <svg viewBox="0 0 1376 768" aria-hidden="true">
++      <g class="main">
++        <path pathLength="1" style="--d: 0ms" d="M120 560H1260" />
++        <path pathLength="1" style="--d: 150ms" d="M252 187H1098V210H252Z" />
++        <path pathLength="1" style="--d: 250ms" d="M252 210L322 228" />
++        <path pathLength="1" style="--d: 250ms" d="M1098 210L1000 282" />
++        <path pathLength="1" style="--d: 400ms" d="M322 228V560 M395 228V560" />
++        <path pathLength="1" style="--d: 550ms" d="M620 228H1000 M620 228V560 M801 228V560 M1000 228V560" />
++        <path pathLength="1" style="--d: 700ms" d="M397 252H608V378H397Z M397 428H608V558H397Z" />
++        <path pathLength="1" style="--d: 800ms" d="M392 380H612V427H392Z" />
++        <path pathLength="1" style="--d: 1100ms" d="M643 270H775V367H643Z M857 252H945V365H857Z" />
++        <path pathLength="1" style="--d: 1250ms" d="M596 367H1070V408H596Z" />
++        <path pathLength="1" style="--d: 1400ms" d="M640 432H703V556H640Z M705 432H777V556H705Z M857 428H945V556H857Z" />
++        <path pathLength="1" style="--d: 1550ms" d="M1000 447H1178V545H1000Z M1003 467H1107V545H1003Z" />
++      </g>
++      <g class="dim">
++        <path pathLength="1" style="--d: 1800ms" d="M252 610H1098 M252 598V622 M1098 598V622" />
++        <path pathLength="1" style="--d: 1900ms" d="M205 187V558 M193 187H217 M193 558H217" />
++        <text x="675" y="660" text-anchor="middle">14.00 m</text>
++        <text x="172" y="372" text-anchor="middle" transform="rotate(-90 172 372)">6.20 m</text>
++      </g>
++    </svg>
++  </div>
+ </template>
++
+ <style scoped>
+-.bp { width: 100%; height: auto }
+-.draw path { fill: none; stroke: #cfe3f5; stroke-width: 2; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 2.4s ease-out forwards }
+-.draw path:nth-child(3) { animation-delay: .4s }
+-.draw path:nth-child(5) { animation-delay: .8s }
+-.dim path { stroke: var(--signal); stroke-width: 1; animation-delay: 1.4s }
+-.dim text { fill: var(--signal); font: 14px 'Public Sans', sans-serif; opacity: 0; animation: show .6s 2.6s forwards }
++.plate { position: relative; aspect-ratio: 1376 / 768; overflow: hidden; border: 1px solid rgba(255, 255, 255, .14); background-color: #102a40; background-image: linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px); background-size: 28px 28px }
++.photo, svg { position: absolute; inset: 0; width: 100%; height: 100% }
++.photo { object-fit: cover; animation: photo-in 900ms var(--ease-out) 2900ms both }
++
++.main path, .dim path { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1200ms var(--ease-out) var(--d, 0ms) forwards }
++.main path { stroke: #cfe3f5; stroke-width: 4 }
++.main { animation: settle 700ms ease-out 3100ms forwards }
++.dim { filter: drop-shadow(0 0 3px rgba(11, 28, 44, .9)) }
++.dim path { stroke: var(--signal); stroke-width: 3 }
++.dim text { fill: var(--signal); font: 600 34px 'Barlow Condensed', sans-serif; letter-spacing: .02em; paint-order: stroke; stroke: rgba(11, 28, 44, .75); stroke-width: 7px; stroke-linejoin: round; opacity: 0; animation: label-in 500ms ease-out 2500ms forwards }
++
++.is-settled .photo { animation: none; opacity: 1 }
++.is-settled .main { animation: none; opacity: 0 }
++.is-settled .dim path { animation: none; stroke-dashoffset: 0 }
++.is-settled .dim text { animation: none; opacity: 1 }
++
+ @keyframes draw { to { stroke-dashoffset: 0 } }
+-@keyframes show { to { opacity: 1 } }
+-@media (prefers-reduced-motion: reduce) {
+-  .draw path { animation: none; stroke-dashoffset: 0 }
+-  .dim text { animation: none; opacity: 1 }
+-}
++@keyframes photo-in { from { opacity: 0 } to { opacity: 1 } }
++@keyframes settle { to { opacity: 0 } }
++@keyframes label-in { to { opacity: 1 } }
+ </style>
+diff --git a/src/components/ProjectCard.vue b/src/components/ProjectCard.vue
+deleted file mode 100644
+index f859007..0000000
+--- a/src/components/ProjectCard.vue
++++ /dev/null
+@@ -1,14 +0,0 @@
+-<script setup>
+-defineProps({ project: { type: Object, required: true } })
+-</script>
+-<template>
+-  <RouterLink :to="`/projects/${project.id}`" class="card">
+-    <div class="thumb">
+-      <img :src="project.image" :alt="project.title" loading="lazy" @load="$event.target.classList.add('loaded')" @error="$event.target.style.display = 'none'" />
+-    </div>
+-    <div class="body">
+-      <h3>{{ project.title }}</h3>
+-      <p>{{ project.type }}, {{ project.place }}, {{ project.year }}</p>
+-    </div>
+-  </RouterLink>
+-</template>
+diff --git a/src/components/ProjectRow.vue b/src/components/ProjectRow.vue
+new file mode 100644
+index 0000000..419c5a4
+--- /dev/null
++++ b/src/components/ProjectRow.vue
+@@ -0,0 +1,21 @@
++<script setup>
++defineProps({ project: { type: Object, required: true } })
++</script>
++<template>
++  <li class="reg-row">
++    <RouterLink :to="`/projects/${project.id}`">
++      <div class="thumb">
++        <img :src="project.image" :alt="project.title" loading="lazy" @load="$event.target.classList.add('loaded')" @error="$event.target.style.display = 'none'" />
++      </div>
++      <div class="reg-title">
++        <h3>{{ project.title }}</h3>
++        <p>{{ project.type }}, {{ project.place }}</p>
++      </div>
++      <dl class="specs">
++        <div><dt>Size</dt><dd>{{ project.size }}</dd></div>
++        <div><dt>Duration</dt><dd>{{ project.duration }}</dd></div>
++        <div><dt>Year</dt><dd>{{ project.year }}</dd></div>
++      </dl>
++    </RouterLink>
++  </li>
++</template>
+diff --git a/src/directives/reveal.js b/src/directives/reveal.js
+deleted file mode 100644
+index 12d892a..0000000
+--- a/src/directives/reveal.js
++++ /dev/null
+@@ -1,24 +0,0 @@
+-let revealObserver
+-
+-export default {
+-  mounted(element) {
+-    if (
+-      typeof IntersectionObserver === 'undefined' ||
+-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+-    ) return
+-
+-    revealObserver ??= new IntersectionObserver((entries, observer) => {
+-      for (const entry of entries) {
+-        if (!entry.isIntersecting) continue
+-        entry.target.classList.add('is-visible')
+-        observer.unobserve(entry.target)
+-      }
+-    }, { threshold: 0.06, rootMargin: '0px 0px -16px 0px' })
+-
+-    element.classList.add('reveal-ready')
+-    revealObserver.observe(element)
+-  },
+-  unmounted(element) {
+-    revealObserver?.unobserve(element)
+-  }
+-}
+diff --git a/src/main.js b/src/main.js
+index 719368b..d59e167 100644
+--- a/src/main.js
++++ b/src/main.js
+@@ -1,6 +1,5 @@
+ import { createApp } from 'vue'
+ import App from './App.vue'
+ import router from './router'
+-import reveal from './directives/reveal'
+ import './assets/main.css'
+-createApp(App).use(router).directive('reveal', reveal).mount('#app')
++createApp(App).use(router).mount('#app')
+diff --git a/src/pages/AboutPage.vue b/src/pages/AboutPage.vue
+index 367bbe6..903ae4b 100644
+--- a/src/pages/AboutPage.vue
++++ b/src/pages/AboutPage.vue
+@@ -9,13 +9,9 @@ const certs = ['Licensed contractor, Class III', 'ISO 9001 quality management',
+     <h1>About {{ company.name }}</h1>
+     <p class="lead">We started in 2008 as a four-person renovation crew in Sofia. Today we build houses, offices and warehouses across the country.</p>
+     <p>We keep our own crews instead of subcontracting everything, so the people who quote the job are the people who deliver it.</p>
+-    <dl class="stats">
+-      <div><dt>{{ years }}</dt><dd>years in business</dd></div>
+-      <div><dt>140</dt><dd>finished projects</dd></div>
+-      <div><dt>45</dt><dd>people on our crews</dd></div>
+-    </dl>
++    <p>{{ years }} years in business, 140 finished projects, 45 people on our crews.</p>
+   </div>
+-  <section v-reveal class="wrap section two">
++  <section class="wrap section two">
+     <div><h2>Licenses and certificates</h2><ul><li v-for="c in certs" :key="c">{{ c }}</li></ul></div>
+     <div><h2>Team</h2><ul><li v-for="[n, r] in team" :key="n"><strong>{{ n }}</strong>, {{ r }}</li></ul></div>
+   </section>
+diff --git a/src/pages/HomePage.vue b/src/pages/HomePage.vue
+index 0c12e52..b7bc752 100644
+--- a/src/pages/HomePage.vue
++++ b/src/pages/HomePage.vue
+@@ -1,5 +1,7 @@
+ <script setup>
+-import ProjectCard from '../components/ProjectCard.vue'
++import ProjectRow from '../components/ProjectRow.vue'
++import HeroBlueprint from '../components/HeroBlueprint.vue'
++import heroPhoto from '../assets/images/hero.jpeg'
+ import { services } from '../data/services'
+ import { projects } from '../data/projects'
+ import { company } from '../data/company'
+@@ -16,7 +18,6 @@ const steps = [
+   <section class="hero">
+     <div class="wrap">
+       <div class="hero-copy">
+-        <p class="eyebrow">Built with care. Made to last.</p>
+         <h1>We build homes, offices and warehouses across Bulgaria.</h1>
+         <p class="lead">{{ years }} years, 140 finished projects, one team from first sketch to the keys in your hand.</p>
+         <p class="actions">
+@@ -24,10 +25,11 @@ const steps = [
+           <RouterLink to="/projects" class="btn-line">See our projects</RouterLink>
+         </p>
+       </div>
++      <HeroBlueprint :photo="heroPhoto" />
+     </div>
+   </section>
+ 
+-  <section v-reveal class="section wrap">
++  <section class="section wrap">
+     <h2>What we build and fix</h2>
+     <div class="rows">
+       <div v-for="s in services" :key="s.title"><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>
+@@ -35,20 +37,20 @@ const steps = [
+     <p class="more"><RouterLink to="/services">All services</RouterLink></p>
+   </section>
+ 
+-  <section v-reveal class="section wrap">
++  <section class="section wrap">
+     <h2>Recent projects</h2>
+-    <div class="grid"><ProjectCard v-for="p in featured" :key="p.id" :project="p" /></div>
++    <ul class="register"><ProjectRow v-for="p in featured" :key="p.id" :project="p" /></ul>
+     <p class="more"><RouterLink to="/projects">All projects</RouterLink></p>
+   </section>
+ 
+-  <section v-reveal class="section wrap">
++  <section class="section wrap">
+     <h2>How a project runs</h2>
+     <ol class="steps">
+       <li v-for="[title, text] in steps" :key="title"><h3>{{ title }}</h3><p>{{ text }}</p></li>
+     </ol>
+   </section>
+ 
+-  <section v-reveal class="band">
++  <section class="band">
+     <div class="wrap">
+       <h2>Planning a build or a renovation?</h2>
+       <p>Tell us what you need. We reply within two working days.</p>
+diff --git a/src/pages/ProjectsPage.vue b/src/pages/ProjectsPage.vue
+index 7b5f108..085db4c 100644
+--- a/src/pages/ProjectsPage.vue
++++ b/src/pages/ProjectsPage.vue
+@@ -1,6 +1,6 @@
+ <script setup>
+ import { ref, computed } from 'vue'
+-import ProjectCard from '../components/ProjectCard.vue'
++import ProjectRow from '../components/ProjectRow.vue'
+ import { projects, projectTypes } from '../data/projects'
+ const active = ref('All')
+ const shown = computed(() => active.value === 'All' ? projects : projects.filter(p => p.type === active.value))
+@@ -12,7 +12,9 @@ const shown = computed(() => active.value === 'All' ? projects : projects.filter
+       <button v-for="t in projectTypes" :key="t" :aria-pressed="active === t" @click="active = t">{{ t }}</button>
+     </div>
+   </div>
+-  <section v-reveal class="wrap section">
+-    <div class="grid"><ProjectCard v-for="p in shown" :key="p.id" :project="p" /></div>
++  <section class="wrap section">
++    <TransitionGroup tag="ul" name="reg" class="register">
++      <ProjectRow v-for="p in shown" :key="p.id" :project="p" />
++    </TransitionGroup>
+   </section>
+ </template>
+diff --git a/src/pages/ServicesPage.vue b/src/pages/ServicesPage.vue
+index 87b408d..74fcfa5 100644
+--- a/src/pages/ServicesPage.vue
++++ b/src/pages/ServicesPage.vue
+@@ -6,7 +6,7 @@ import { services } from '../data/services'
+     <h1>Services</h1>
+     <p class="lead">Four kinds of work, all done by our own crews.</p>
+   </div>
+-  <section v-reveal class="wrap rows">
++  <section class="wrap rows">
+     <div v-for="s in services" :key="s.title">
+       <h2>{{ s.title }}</h2>
+       <div>
+@@ -15,7 +15,7 @@ import { services } from '../data/services'
+       </div>
+     </div>
+   </section>
+-  <section v-reveal class="section wrap">
++  <section class="section wrap">
+     <RouterLink to="/contact" class="btn">Request a quote</RouterLink>
+   </section>
+ </template>

@@ -7,12 +7,12 @@ const route = useRoute()
 const p = computed(() => projects.find(x => x.id === route.params.id))
 </script>
 <template>
-  <article v-if="p" v-reveal class="wrap page-head">
+  <article v-if="p" class="wrap page-head">
     <h1>{{ p.title }}</h1>
     <p class="lead">{{ p.summary }}</p>
     <BeforeAfter v-if="p.before" :before="p.before" :after="p.image" />
     <div v-else class="thumb wide">
-      <img :src="p.image" :alt="p.title" @error="$event.target.style.display = 'none'" />
+      <img :src="p.image" :alt="p.title" @load="$event.target.classList.add('loaded')" @error="$event.target.style.display = 'none'" />
     </div>
     <dl class="specs">
       <div><dt>Location</dt><dd>{{ p.place }}</dd></div>
